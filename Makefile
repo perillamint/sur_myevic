@@ -42,13 +42,10 @@ MYEVIC_OBJS := src/myevic.o \
 	src/strings.o \
 	src/meusbd.o \
 	src/vcom.o \
-	src/fbdata.o \
 	src/fonts.o \
 	src/display.o \
 	src/SSD1306.o \
 	src/SSD1327.o
-	#src/flappy.o \
-	#src/tetris.o \
 
 AEABI_OBJS := src/aeabi/aeabi_memset-thumb2.o \
 	src/aeabi/aeabi_memclr.o
