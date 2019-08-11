@@ -42,13 +42,13 @@ MYEVIC_OBJS := src/myevic.o \
 	src/strings.o \
 	src/meusbd.o \
 	src/vcom.o \
-	src/flappy.o \
 	src/fbdata.o \
-	src/tetris.o \
 	src/fonts.o \
 	src/display.o \
 	src/SSD1306.o \
 	src/SSD1327.o
+	#src/flappy.o \
+	#src/tetris.o \
 
 AEABI_OBJS := src/aeabi/aeabi_memset-thumb2.o \
 	src/aeabi/aeabi_memclr.o
@@ -195,8 +195,8 @@ $(TARGET)_dec.bin: $(OBJS_FIXPATH) $(MYEVIC_OBJS)
 #    export LANG=C.UTF-8
 
 $(TARGET).bin: $(TARGET)_dec.bin
-#evic convert $(OUTDIR)/$(TARGET)_dec.bin -o $(OUTDIR)/$(TARGET).bin
-	Software_Win/FWUpdater 408376 $(OUTDIR)/$(TARGET)_dec.bin $(OUTDIR)/$(TARGET).bin
+	evic convert $(OUTDIR)/$(TARGET)_dec.bin -o $(OUTDIR)/$(TARGET).bin
+	#Software_Win/FWUpdater 408376 $(OUTDIR)/$(TARGET)_dec.bin $(OUTDIR)/$(TARGET).bin
 docs:
 	doxygen
 

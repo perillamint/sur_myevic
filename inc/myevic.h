@@ -161,7 +161,6 @@ typedef struct
 /* 00000080 */	int batt_unk:1;
 
 /* 00000100 */	int tick_1hz:1;
-/* 00000200 */	int playing_fb:1;
 /* 00000400 */	int has_x32:1;
 /* 00000800 */	int asleep:1;               //mod in sleep or off
 /* 00001000 */	int sample_atemp:1;         //was debug 
@@ -178,7 +177,6 @@ typedef struct
 /* 00400000 */	int led_on:1;
 /* 00800000 */	int apuff:1;       //auto fire used
 
-/* 01000000 */	int playing_tt:1;
 /* 02000000 */	int soft_charge:1;
 /* 04000000 */	int inverse:1;
 /* 08000000 */	int pbank:1;

@@ -2531,55 +2531,6 @@ __myevic__ void Object3DOnClick()
         UpdateDFTimer = 50;
 }
 
-
-//-----------------------------------------------------------------------------
-
-__myevic__ void GameMEnter()
-{
-    CurrentMenuItem = FBSpeed;
-}
-
-__myevic__ void GameISelect()
-{
-    if ( CurrentMenuItem < 3 )
-    {
-	FBSpeed = CurrentMenuItem;
-	UpdateDFTimer = 50;
-    }
-}
-
-__myevic__ void GameIClick()
-{
-    if ( CurrentMenuItem < 3 )
-    {
-	if ( FBSpeed > 2 ) FBSpeed = 1;
-        fbStartGame();
-    }
-}
-
-__myevic__ void GameTtMEnter()
-{
-	CurrentMenuItem = dfTTSpeed;
-}
-
-__myevic__ void GameTtISelect()
-{
-    if ( CurrentMenuItem < 3 )
-    {
-	dfTTSpeed = CurrentMenuItem;
-	UpdateDFTimer = 50;
-    }
-}
-
-__myevic__ void GameTtIClick()
-{
-    if ( CurrentMenuItem < 3 )
-    {
-        if ( dfTTSpeed > 2 ) dfTTSpeed = 1;
-        ttStartGame();
-    }
-}
-
 //-----------------------------------------------------------------------------
 
 __myevic__ void ModesMEnter()
@@ -3154,25 +3105,6 @@ __myevic__ int CurveMenuOnEvent( int event )
 	return vret;
 }
 
-
-const menu_t GameMenu =
-{
-	String_Game,
-	&MiscsMenu,
-	GameMEnter+1,
-	0,
-	GameISelect+1,
-	GameIClick+1,
-	0,
-	4,
-	{
-		{ String_Easy, 0, 0, 0 },
-		{ String_Normal, 0, 0, 0 },
-		{ String_Hard, 0, 0, 0 },
-		{ String_Back, 0, EVENT_PARENT_MENU, 0 }
-	}
-};
-
 const mdata_t Garbage =
 {
 	&dfStatus2,
@@ -3181,24 +3113,6 @@ const mdata_t Garbage =
 	17
 };
 
-const menu_t GameTtMenu =
-{
-	String_Tetris,
-	&MiscsMenu,
-	GameTtMEnter+1,
-	0,
-	GameTtISelect+1,
-	GameTtIClick+1,
-	0,
-	5,
-	{
-		{ String_Easy, 0, 0, 0 },
-		{ String_Normal, 0, 0, 0 },
-		{ String_Survival, 0, 0, 0 },
-                { String_Garbage, &Garbage, 0, MACTION_DATA },    
-		{ String_Back, 0, EVENT_PARENT_MENU, 0 }
-	}
-};
 const menu_t ModesMenu =
 {
 	String_Modes,
@@ -3562,10 +3476,8 @@ const menu_t MiscsMenu =
 	0,
 	MiscMenuOnClick+1,
 	MiscMenuOnEvent+1,
-	10,
+	8,
 	{
-		{ String_Game, &GameMenu, 0, MACTION_SUBMENU },
-                { String_Tetris, &GameTtMenu, 0, MACTION_SUBMENU },                        
 		{ String_Led, &LedMenu, 0, MACTION_SUBMENU },
 		//{ String_3D, &Object3DMenu, 0, MACTION_SUBMENU },
                 //{ String_FiFlip, &FireFlip, 0, MACTION_DATA },     

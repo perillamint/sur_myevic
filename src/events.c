@@ -221,18 +221,12 @@ __myevic__ void SetClicksAction( uint8_t num )
             FireClicksEvent = EVENT_PROFILE_MENU;
             break;
                                                         
-        case CLICK_ACTION_TETRIS:
-            FireClicksEvent = EVENT_TETRIS; // tetris
-            break;
-                                                        
-        case CLICK_ACTION_GAME:
-            FireClicksEvent = 41;	// flappy
-            break;
-                                                        
         case CLICK_ACTION_SAVER:
             FireClicksEvent = EVENT_SAVER;
             break;       
 
+        case CLICK_ACTION_GAME:
+        case CLICK_ACTION_TETRIS:
         case CLICK_ACTION_MENU:
             FireClicksEvent = EVENT_ENTER_MENUS;
             break;
@@ -632,26 +626,7 @@ __myevic__ void GetUserInput()
 			}
 			else if ( !dfStatus.off )
 			{
-				if ( !gFlags.playing_fb && !gFlags.playing_tt)
-				{
-					Event = EVENT_ENTER_MENUS;
-				}
-				else
-				{
-                                    Event = 0;
-                                    if ( gFlags.playing_fb )
-                                    {
-					gFlags.playing_fb = 0;					
-					fbInitTimeouts();
-                                    }
-                                    else if ( gFlags.playing_tt )
-                                    {
-					gFlags.playing_tt = 0;
-					ttInitTimeouts();
-                                    }
-                                    MainView();
-
-				}                                
+				Event = EVENT_ENTER_MENUS;
 			}
                 }
                 else if ( UserInputs == 7 ) //all 3 buttons
@@ -1761,20 +1736,6 @@ __myevic__ int CustomEvents()
 			EditItemIndex = 0;
 			break;
 */
-                        
-                case 41:
-			//fbStartGame();
-                        CurrentMenu = &GameMenu; 
-                        CurrentMenuItem = FBSpeed;
-                        SetScreen( 102, 15 );                        
-			break;
-                        
-                case EVENT_TETRIS:
- 			//ttStartGame();
-                        CurrentMenu = &GameTtMenu; 
-                        CurrentMenuItem = dfTTSpeed;
-                        SetScreen( 102, 15 );
-			break;
                         
                 case EVENT_SAVER:
                         gFlags.animready = 0;

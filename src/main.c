@@ -1073,46 +1073,6 @@ __myevic__ void Main()
                                 
 	while ( 1 )
 	{            
-            	while ( gFlags.playing_fb || gFlags.playing_tt )
-		{
-                        if ( gFlags.playing_fb )
-                                fbCallTimeouts();
-                        else
-                                ttCallTimeouts();
-                            
-			if ( gFlags.tick_100hz )
-			{
-				// 100Hz
-				gFlags.tick_100hz = 0;
-				ResetWatchDog();
-				TimedItems();
-				//SleepIfIdle();
-				GetUserInput();
-                                if ( !SleepTimer )
-                                {
-                                    if ( gFlags.playing_fb )
-                                    {
-                                        gFlags.playing_fb = 0;
-					fbInitTimeouts();
-                                    }
-                                    else
-                                    {
-                                        gFlags.playing_tt = 0;
-					ttInitTimeouts();
-                                    }   
-                                }
-                                if ( !PE0 || !PD2 || !PD3 )
-                                    SleepTimer = 3000; //30 sec
-			}
-                        
-			if ( gFlags.tick_10hz )
-			{
-				// 10Hz
-				gFlags.tick_10hz = 0;
-				DataFlashUpdateTick();
-			}
-		}
-                
 		if ( gFlags.firing )
 		{
 			ReadAtoCurrent();
