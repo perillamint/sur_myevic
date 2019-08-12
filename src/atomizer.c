@@ -13,6 +13,8 @@
 
 //=========================================================================
 
+#define PID_HZ 100
+
 //=========================================================================
 
 uint32_t	AtoVoltsADC;
@@ -2625,7 +2627,7 @@ __myevic__ void TweakTargetVoltsPID()
 	AtoTemp = FilterWMean( &TempFilter, AtoTemp );
 
 	// 50Hz refresh
-	if ( AlgoCtl.counter % 20 )
+	if ( AlgoCtl.counter % (1000 / PID_HZ) )
 		return;
 
 	AlgoCtl.atemp = FarenheitToC( AtoTemp );
@@ -2637,8 +2639,8 @@ __myevic__ void TweakTargetVoltsPID()
 	AlgoCtl.integ += error;
 
 	pwr = AlgoCtl.error * dfPID.P
-		+ AlgoCtl.integ * dfPID.I / 50
-		+ ediff * dfPID.D * 50;
+		+ AlgoCtl.integ * dfPID.I / PID_HZ
+		+ ediff * dfPID.D * PID_HZ;
 
 	pwr /= 100;
 
