@@ -2618,6 +2618,7 @@ __myevic__ void TweakTargetVoltsPID()
 	int32_t error;
 	int32_t ediff;
 	uint32_t volts;
+	uint8_t fSaturated = 0;
 
 	++AlgoCtl.counter;
 
@@ -2643,12 +2644,27 @@ __myevic__ void TweakTargetVoltsPID()
 
 	if ( pwr < 10 ) pwr = 10;
 	pwr = AtoPowerLimit( pwr );
-	if ( pwr > dfTCPower ) pwr = dfTCPower;
-	if ( pwr > BatteryMaxPwr ) pwr = BatteryMaxPwr;
+	if ( pwr > dfTCPower ) {
+		fSaturated = 1;
+		pwr = dfTCPower;
+	}
+
+	if ( pwr > BatteryMaxPwr ) {
+		fSaturated = 1;
+		pwr = BatteryMaxPwr;
+	}
 
 	volts = GetVoltsForPower( pwr );
 
-	if ( volts < 50 ) volts = 50;
+	if ( volts < 50 ) {
+		fSaturated = 1;
+		volts = 50;
+	}
+
+	if (fSaturated != 0) {
+		// apply anti windup here
+		AlgoCtl.integ -= error;
+	}
 
 	if ( gFlags.decrease_voltage )
 	{
